@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.tesji.mychat" />
+                  <option name="mobileSdkAppId" value="1:626264015037:android:27c83a1c3ed255cd2237d4" />
+                  <option name="projectId" value="mychat-1d9e3" />
+                  <option name="projectNumber" value="626264015037" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

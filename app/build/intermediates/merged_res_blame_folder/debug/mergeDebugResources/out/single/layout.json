@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-mergeDebugResources-36:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-main-39:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-mergeDebugResources-36:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-main-39:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "com.tesji.mychat.app-mergeDebugResources-36:/layout/message_item.xml",
+        "source": "com.tesji.mychat.app-main-39:/layout/message_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-mergeDebugResources-36:\\layout\\message_item.xml",
+        "source": "C:\\Users\\mildr\\.gradle\\daemon\\8.13\\com.tesji.mychat.app-main-39:\\layout\\message_item.xml"
+    },
+    {
+        "merged": "com.tesji.mychat.app-mergeDebugResources-36:/layout/activity_login.xml",
+        "source": "com.tesji.mychat.app-main-39:/layout/activity_login.xml"
+    }
+]

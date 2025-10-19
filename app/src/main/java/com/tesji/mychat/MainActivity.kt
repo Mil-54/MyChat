@@ -1,6 +1,9 @@
 package com.tesji.mychat
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -12,24 +15,29 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var dbRef: DatabaseReference
-    private lateinit var messageList: ArrayList<Message>
+
     private lateinit var messageAdapter: MessageAdapter
+    private lateinit var messageList: ArrayList<Message>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Usar la Toolbar que definimos en el XML
+        setSupportActionBar(binding.toolbar)
+
         auth = FirebaseAuth.getInstance()
         dbRef = FirebaseDatabase.getInstance().reference
 
         messageList = ArrayList()
-        messageAdapter = MessageAdapter(messageList)
+        // CORRECCIÓN: Se invierten los argumentos para que coincidan con el constructor del Adapter
+        messageAdapter = MessageAdapter(this, messageList)
 
         binding.recyclerViewMessages.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewMessages.adapter = messageAdapter
 
-        // Load messages
+        // Lógica para cargar los mensajes de la base de datos
         dbRef.child("chats").child("general").child("messages")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -41,15 +49,16 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     messageAdapter.notifyDataSetChanged()
+                    // Desplazarse al último mensaje
                     binding.recyclerViewMessages.scrollToPosition(messageList.size - 1)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // Handle error
+                    // Manejar error si es necesario
                 }
             })
 
-        // Send message
+        // Lógica para enviar un mensaje
         binding.buttonSend.setOnClickListener {
             val messageText = binding.editTextMessage.text.toString()
             val senderId = auth.currentUser?.uid
@@ -60,6 +69,24 @@ class MainActivity : AppCompatActivity() {
                 binding.editTextMessage.setText("")
             }
         }
+    }
+
+    // --- Funciones para el Menú de Logout ---
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_logout) {
+            auth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            finish()
+            startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
 

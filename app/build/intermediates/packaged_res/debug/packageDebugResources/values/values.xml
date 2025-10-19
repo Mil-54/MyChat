@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="my_chat_blue">#007AFF</color>
+    <color name="my_chat_gray">#E5E5EA</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">MyChat</string>
+    <string name="gcm_defaultSenderId" translatable="false">626264015037</string>
+    <string name="google_api_key" translatable="false">AIzaSyBPbGROUs1_dFxavVTeqxGmeYPEZ_ZEJLE</string>
+    <string name="google_app_id" translatable="false">1:626264015037:android:27c83a1c3ed255cd2237d4</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBPbGROUs1_dFxavVTeqxGmeYPEZ_ZEJLE</string>
+    <string name="google_storage_bucket" translatable="false">mychat-1d9e3.firebasestorage.app</string>
+    <string name="project_id" translatable="false">mychat-1d9e3</string>
+    <style name="Theme.MyChat" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+</resources>

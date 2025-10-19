@@ -1,63 +1,58 @@
 package com.tesji.mychat
 
+import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 
-class MessageAdapter(private val messageList: ArrayList<Message>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessageAdapter(private val context: Context, private val messageList: ArrayList<Message>) :
+    RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    private val ITEM_SENT = 1
-    private val ITEM_RECEIVE = 2
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == ITEM_SENT) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false)
-            SentViewHolder(view)
-        } else {
-            // We can create a different layout for received messages if we want
-            // For simplicity, we'll use the same for now, but you could change R.layout.message_item
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false)
-            ReceiveViewHolder(view)
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.message_item, parent, false)
+        return MessageViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val currentMessage = messageList[position]
+        holder.messageText.text = currentMessage.text
 
-        if (holder.itemViewType == ITEM_SENT) {
-            val viewHolder = holder as SentViewHolder
-            viewHolder.sentMessage.text = currentMessage.text
-            // Here you could add logic to align sent messages to the right
+        // --- ESTA ES LA LÓGICA CORREGIDA ---
+        // Obtenemos los parámetros de layout del TextView, no del itemView completo
+        val layoutParams = holder.messageText.layoutParams as FrameLayout.LayoutParams
+
+        // Verificamos si el mensaje fue enviado por el usuario actual
+        if (currentMessage.senderId == FirebaseAuth.getInstance().currentUser?.uid) {
+            // Mensaje enviado (derecha, azul)
+            layoutParams.gravity = Gravity.END
+            holder.messageText.background = ContextCompat.getDrawable(context, R.drawable.background_sent)
+            // Cambiar color de texto para que sea legible sobre fondo azul
+            holder.messageText.setTextColor(ContextCompat.getColor(context, R.color.white))
         } else {
-            val viewHolder = holder as ReceiveViewHolder
-            viewHolder.receivedMessage.text = currentMessage.text
-            // Here you could add logic to align received messages to the left
+            // Mensaje recibido (izquierda, gris)
+            layoutParams.gravity = Gravity.START
+            holder.messageText.background = ContextCompat.getDrawable(context, R.drawable.background_received)
+            // Cambiar color de texto para que sea legible sobre fondo gris
+            holder.messageText.setTextColor(ContextCompat.getColor(context, R.color.black))
         }
+
+        // Aplicamos los parámetros de layout actualizados al TextView
+        holder.messageText.layoutParams = layoutParams
     }
+
 
     override fun getItemCount(): Int {
         return messageList.size
     }
 
-    override fun getItemViewType(position: Int): Int {
-        val currentMessage = messageList[position]
-        return if (FirebaseAuth.getInstance().currentUser?.uid.equals(currentMessage.senderId)) {
-            ITEM_SENT
-        } else {
-            ITEM_RECEIVE
-        }
-    }
-
-    class SentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val sentMessage: TextView = itemView.findViewById(R.id.textViewMessage)
-    }
-
-    class ReceiveViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val receivedMessage: TextView = itemView.findViewById(R.id.textViewMessage)
+    class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val messageText: TextView = itemView.findViewById(R.id.textViewMessage)
     }
 }
 
