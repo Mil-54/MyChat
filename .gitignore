@@ -1,0 +1,58 @@
+# Creado por Android Studio
+
+### Android ###
+# Archivos de la aplicación compilada
+*.apk
+*.aab
+
+# Archivos de la máquina virtual (ART/Dalvik)
+*.dex
+
+# Archivos de clase de Java
+*.class
+
+# Archivos generados
+/build/
+
+# Archivo de configuración local (ruta del SDK, etc.)
+/local.properties
+
+# Carpeta de Proguard generada por la compilación
+/proguard/
+
+# Archivos de log
+*.log
+
+# Archivos del editor de navegación de Android Studio
+.navigation/
+
+# Capturas de pantalla de Android Studio
+/captures/
+
+# Archivos Keystore (¡MUY IMPORTANTE!)
+*.jks
+*.keystore
+
+# Carpeta de compilación nativa externa
+.cxx/
+
+# Archivo de configuración de Google Services (¡IMPORTANTE!)
+google-services.json
+
+### Intellij / Android Studio ###
+# Configuraciones específicas del usuario
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries/
+.idea/libraries/
+
+# Datos sensibles de módulos
+# .idea/modules.xml
+
+# Configuraciones de ejecución autogeneradas
+.idea/runConfigurations/
+
+# Archivos de caché
+.gradle/
