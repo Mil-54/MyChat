@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "626264015037",
+    "project_id": "mychat-1d9e3",
+    "storage_bucket": "mychat-1d9e3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626264015037:android:27c83a1c3ed255cd2237d4",
+        "android_client_info": {
+          "package_name": "com.tesji.mychat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPbGROUs1_dFxavVTeqxGmeYPEZ_ZEJLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
